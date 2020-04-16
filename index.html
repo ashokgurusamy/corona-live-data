@@ -116,17 +116,11 @@
     });
 
     function consoleShow(response) {
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 6; i++) {
             count = response.countries_stat;
             cont_name[i] = response.countries_stat[i].country_name;
-            cont_cases[i] = response.countries_stat[i].cases;
+            cont_cases[i] = response.countries_stat[i].cases.replace(/\,/g, '');    
         }
-
-        china = response.countries_stat[0].cases.replace(/\,/g, '');
-        italy = response.countries_stat[1].cases.replace(/\,/g, '');
-        usa = response.countries_stat[2].cases.replace(/\,/g, '');
-        spain = response.countries_stat[3].cases.replace(/\,/g, '');
-        german = response.countries_stat[4].cases.replace(/\,/g, '');
         drawVar();
 
         CreateTableFromJSON();
@@ -134,18 +128,12 @@
     }
 
     function drawVar() {
-        var arr = [china, italy, usa, spain, german];
-        var labels = cont_name.map(x => {
+        var labels = cont_name.map(x => {   
             return x;
         });
-        var data = arr.map(function(e) {
+        var data = cont_cases.map(e => {
             return e;
         })
-        cont_cases.map(parseInt);
-        var dataa = cont_cases.map(x => {
-            return x;
-        });
-        console.log("oops " + data);
 
         function dynamicColors() {
             var r = Math.floor(Math.random() * 255);
